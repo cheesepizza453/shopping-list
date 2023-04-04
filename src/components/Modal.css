@@ -1,0 +1,65 @@
+.dimm {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* 모달 */
+.modal {
+  position: absolute;
+  display: block;
+  width: 310px;
+  height: 210px;
+  background: #fff;
+  z-index: 10;
+  /*left: calc(50vw - 155px);*/
+  left: 27px;
+  top: calc(50vh - 200px);
+  padding: 30px;
+}
+.modal .modal_close_btn {
+  background: transparent;
+  border: none;
+  color: #ff5833;
+  font-size: 24px;
+}
+
+.modal .inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal .inner .modal_title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.modal .inner .moneymoney {
+  border: none;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.modal .inner .modal_btn {
+  border: none;
+  margin-top: 20px;
+  background: #ff5833;
+  color: #fff;
+  border-radius: 10px;
+  padding: 13px 0;
+}
+.modal.close {
+  display: none;
+}
+
+.dimm.close {
+  display: none;
+}

@@ -1,0 +1,31 @@
+/* 메뉴바 */
+.menu_bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 68px;
+  border-top: 2px solid #ff5833;
+}
+.menu_bar_inner {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  color: #ff5833;
+  font-weight: 600;
+}
+
+.menu_bar_inner .item_tag_btn {
+  border: none;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: -0.03em;
+  background: transparent;
+  color: #ff5833;
+}
+.menu_bar_inner .product_num {
+  display: flex;
+}
+.menu_bar_inner .product_num .icon {
+  margin-right: 6px;
+}

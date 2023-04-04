@@ -1,0 +1,29 @@
+.budget_wrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+.budget_wrap .inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.budget_wrap .title {
+  font-size: 14px;
+  flex-grow: 1;
+}
+.budget_wrap .budget_container {
+  font-size: 20px;
+  font-weight: 900;
+}
+.budget_wrap .budget {
+  font-size: 30px;
+}
+.budget_wrap .set_budget {
+  font-size: 14px;
+  padding: 10px 15px;
+  background: #ff5833;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+}
