@@ -20,18 +20,20 @@ function ItemList() {
   const [productNameValue, setProductNameValue] = useState("");
   const saveProductName = (e) => setProductNameValue(e.target.value);
 
-  //상품명 수정모드일 때 상태 바꾸기
-  const [itemNameChange, setitemNameChange] = useState(false);
-  const chageItemName = (index) => {
-    itemNameChange ? setitemNameChange(false) : setitemNameChange(true);
-  };
+  //인풋의 가격 가져오기
+  const [productPriceValue, setProductPriceValue] = useState("");
+  const saveProductPrice = (e) =>
+    setProductPriceValue(
+      e.target.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    );
+  const [forID, setForID] = useState(1000);
 
   return (
     <div className="App">
       <div className="item_list_wrap">
         <div className="buy_item_list_wrap">
           <h3 className="buy_item_title">
-            담아야 할 상품
+            쇼핑리스트
             <span className="buy_item_num">
               {
                 state.items.filter((e) => {
@@ -52,18 +54,32 @@ function ItemList() {
                   onChange={saveProductName}
                   className="buy_item_input"
                 ></input>
+                <input
+                  type="text"
+                  placeholder="가격"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                  }}
+                  onChange={saveProductPrice}
+                  className="buy_item_input"
+                ></input>
                 <button
                   className="buy_item_check_btn"
-                  onClick={() =>
+                  onClick={() => {
                     productNameValue.length !== 0
                       ? dispatch(
                           itemToArray({
                             itemName: productNameValue,
+                            itemPrice: productPriceValue,
                             isChecked: false,
+                            id: forID,
                           })
                         )
-                      : alert("상품명을 입력해주세요.")
-                  }
+                      : alert("상품명을 입력해주세요.");
+                    setForID(forID + 1);
+                    setProductNameValue("");
+                    setProductPriceValue("");
+                  }}
                 >
                   <FontAwesomeIcon icon={faCheck} />
                 </button>
@@ -82,12 +98,15 @@ function ItemList() {
               return (
                 <Item
                   e={e}
-                  key={e.itemName}
-                  itemNameChange={itemNameChange}
-                  setitemNameChange={setitemNameChange}
+                  i={i}
+                  //   itemNameChange={itemNameChange}
+                  //  setitemNameChange={setitemNameChange}
                   saveProductName={saveProductName}
+                  saveProductPrice={saveProductPrice}
                   productNameValue={productNameValue}
-                  chageItemName={chageItemName}
+                  productPriceValue={productPriceValue}
+                  forID={forID}
+                  // chageItemName={chageItemName}
                 />
               );
             })}
@@ -95,7 +114,7 @@ function ItemList() {
       </div>
       <div className="cart_in_item_wrap">
         <h3 className="cart_in_item_title">
-          담은 상품
+          구매완료
           <span className="cart_in_item_num">
             {
               state.items.filter((e) => {
@@ -111,12 +130,14 @@ function ItemList() {
               return (
                 <Item
                   e={e}
-                  key={e.itemName}
-                  itemNameChange={itemNameChange}
-                  setitemNameChange={setitemNameChange}
+                  //itemNameChange={itemNameChange}
+                  //setitemNameChange={setitemNameChange}
                   saveProductName={saveProductName}
+                  saveProductPrice={saveProductPrice}
                   productNameValue={productNameValue}
-                  chageItemName={chageItemName}
+                  productPriceValue={productPriceValue}
+                  //                  chageItemName={chageItemName}
+                  forID={forID}
                 />
               );
             })}

@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+//import { useDispatch, useSelector } from "react-redux";
 import ItemList from "./components/ItemList.js";
 import MenuBar from "./components/MenuBar";
 import Budget from "./components/Budget";
@@ -19,6 +19,9 @@ function App() {
   const [modalOpen, setModlalOpen] = useState(false);
   const [budget, setBudget] = useState(0);
   const [data, setData] = useState([]);
+
+  const budgetChange = budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
   const showModal = () => {
     setModlalOpen(true);
   };
@@ -27,29 +30,25 @@ function App() {
     setModlalOpen(false);
   };
 
-  const setBudget2 = () => {
-    setModlalOpen(false);
-  };
-
-  const onChangeAccount = (e) => {
+  // ToDo : gudget모달 금액란에 콤마 추가하기
+  const budgetValue = (e) => {
     setBudget(e.target.value);
   };
 
   return (
     <div className="wrap">
-      {/* 메뉴바 */}
-      <MenuBar data={data} />
       {/* 예산 */}
-      <Budget showModal={showModal} budget={budget} />
+      <Budget showModal={showModal} budgetChange={budgetChange} />
       {/* 상품리스트 */}
       <ItemList />
+      {/* 메뉴바 */}
+      <MenuBar data={data} />
       {/* 예산 모달 */}
       {modalOpen ? (
         <Modal
           closeModal={closeModal}
-          setBudget={setBudget}
-          setBudget2={setBudget2}
-          onChangeAccount={onChangeAccount}
+          budgetValue={budgetValue}
+          budgetChange={budgetChange}
         />
       ) : null}
     </div>

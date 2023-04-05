@@ -2,7 +2,7 @@
 .menu_bar {
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -0;
   width: 100%;
   height: 68px;
   border-top: 2px solid #ff5833;
@@ -13,6 +13,7 @@
   justify-content: space-between;
   color: #ff5833;
   font-weight: 600;
+  background: #fff;
 }
 
 .menu_bar_inner .item_tag_btn {

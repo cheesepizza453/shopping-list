@@ -1,67 +1,44 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { itemDelete, itemChange, itemToCart } from "../store.js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import React, { useState } from "react";
 import "./item.css";
+import ItemOff from "./item/ItemOff.js";
+import ItemOn from "./item/ItemOn.js";
 
 function Item({
   e,
-  itemNameChange,
-  setitemNameChange,
+  i,
+  //itemNameChange,
+  //setitemNameChange,
   saveProductName,
+  saveProductPrice,
   productNameValue,
-  chageItemName,
+  productPriceValue,
+  // chageItemName,
+  forID,
 }) {
-  let state = useSelector((state) => state);
-  let dispatch = useDispatch();
-  console.log("dfd", state.items);
+  const [itemBtnClickArea, setItemBtnClickArea] = useState(true);
+  const itemBtnClickAreaChange = () => {
+    itemBtnClickArea ? setItemBtnClickArea(false) : setItemBtnClickArea(true);
+  };
+
   return (
-    <div key={e.itemName} className="item">
-      {/* 수정 버튼 누르면 인풋창으로 바뀜. 한번에 바뀌는거 없애야함 */}
-      {itemNameChange ? (
-        <div className="item_inner">
-          <input
-            type="text"
-            placeholder={e.itemName}
-            onChange={saveProductName}
-          ></input>
-          <button
-            onClick={() => {
-              dispatch(
-                itemChange({
-                  itemName: productNameValue,
-                  isChecked: false,
-                })
-              );
-              setitemNameChange(false);
-            }}
-          >
-            바꾸깅
-          </button>
-        </div>
+    //ToDo : 키값에 함수 넣으면 리렌더링 이슈로 인풋창 계속 리셋되어 임시로 index 추가함 / 230405
+    <div className="item" key={forID}>
+      {itemBtnClickArea ? (
+        <ItemOff
+          e={e}
+          itemBtnClickArea={itemBtnClickArea}
+          itemBtnClickAreaChange={itemBtnClickAreaChange}
+        />
       ) : (
-        <div className="item_inner">
-          <p>{e.itemName}</p>
-          <button
-            onClick={() => dispatch(itemDelete(e))}
-            className="delete_btn"
-          >
-            <FontAwesomeIcon icon={faTrashCan} />
-          </button>
-          <button onClick={chageItemName} className="change_btn">
-            수정
-          </button>
-          <button
-            onClick={() => {
-              console.log(e.isChecked);
-              dispatch(itemToCart(e));
-            }}
-            className="cart_in_btn"
-          >
-            구매!
-          </button>
-        </div>
+        <ItemOn
+          e={e}
+          itemBtnClickArea={itemBtnClickArea}
+          itemBtnClickAreaChange={itemBtnClickAreaChange}
+          saveProductName={saveProductName}
+          saveProductPrice={saveProductPrice}
+          productNameValue={productNameValue}
+          productPriceValue={productPriceValue}
+        />
       )}
     </div>
   );

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Modal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const Modal = ({ closeModal, setBudget, setBudget2, onChangeAccount }) => {
+const Modal = ({ closeModal, budgetValue, budgetChange }) => {
   return (
     <div>
       <div className="dimm"></div>
@@ -16,10 +16,10 @@ const Modal = ({ closeModal, setBudget, setBudget2, onChangeAccount }) => {
           <input
             className="moneymoney"
             type="text"
-            placeholder="123,456"
-            onChange={onChangeAccount}
+            placeholder={budgetChange}
+            onChange={budgetValue}
           />
-          <button className="modal_btn" onClick={setBudget2}>
+          <button className="modal_btn" onClick={closeModal}>
             설정하기
           </button>
         </div>
