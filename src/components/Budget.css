@@ -13,8 +13,10 @@
   flex-grow: 1;
 }
 .budget_wrap .budget_container {
+  max-width: 200px;
   font-size: 20px;
   font-weight: 900;
+  overflow: hidden;
 }
 .budget_wrap .budget {
   font-size: 30px;

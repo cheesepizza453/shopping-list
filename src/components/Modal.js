@@ -1,9 +1,14 @@
 import React from "react";
 import "./Modal.css";
+import { useDispatch, useSelector } from "react-redux";
+import { budgetChange } from "../store.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const Modal = ({ closeModal, budgetValue, budgetChange }) => {
+const Modal = ({ closeModal }) => {
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+
   return (
     <div>
       <div className="dimm"></div>
@@ -16,8 +21,10 @@ const Modal = ({ closeModal, budgetValue, budgetChange }) => {
           <input
             className="moneymoney"
             type="text"
-            placeholder={budgetChange}
-            onChange={budgetValue}
+            placeholder={state.budget}
+            onChange={(event) => {
+              dispatch(budgetChange(event.target.value));
+            }}
           />
           <button className="modal_btn" onClick={closeModal}>
             설정하기

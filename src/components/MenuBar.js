@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 
-const MenuBar = ({ data }) => {
+const MenuBar = () => {
   let state = useSelector((state) => state);
 
   return (

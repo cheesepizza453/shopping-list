@@ -1,8 +1,22 @@
 {
-  "todos": [
+  "items": [
     {
-      "itemName": "과자",
-      "isChecked": false
+      "itemName": "aaa",
+      "itemPrice": "111",
+      "isChecked": false,
+      "id": 1
+    },
+    {
+      "itemName": "bbb",
+      "itemPrice": "222",
+      "isChecked": false,
+      "id": 2
+    },
+    {
+      "itemName": "ccc",
+      "itemPrice": "333",
+      "isChecked": false,
+      "id": 4
     }
   ]
 }

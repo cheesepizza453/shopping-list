@@ -1,10 +1,11 @@
 /* 메뉴바 */
 .menu_bar {
-  position: absolute;
-  left: 0;
-  bottom: -0;
-  width: 100%;
+  position: fixed;
+  width: 390px;
   height: 68px;
+  left: 50%;
+  bottom: -5px;
+  transform: translateX(-50%);
   border-top: 2px solid #ff5833;
 }
 .menu_bar_inner {

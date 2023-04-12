@@ -137,6 +137,10 @@
 .item_inner .item_price_input {
   font-size: 12px;
 }
+
+.item_inner.item_on {
+  border: 2px solid #ff5833;
+}
 .delete_btn,
 .change_btn {
   display: block;

@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { itemToCart } from "../../store.js";
-
 import "./../item.css";
 
 function ItemOff({ e, itemBtnClickAreaChange }) {
@@ -19,13 +18,12 @@ function ItemOff({ e, itemBtnClickAreaChange }) {
       <div
         className="item_inner"
         onClick={(event) => {
-          console.log(e.isChecked);
           dispatch(itemToCart(e));
-          event.stopPropagation();
+          event.stopPropagation(); //상위 엘리먼트들로의 이벤트 전파를 중단시킨다.
         }}
       >
         <p className="item_Name">{e.itemName}</p>
-        <p className="item_price">{e.itemPrice}</p>
+        <p className="item_price">₩ {e.itemPrice}</p>
       </div>
     </div>
   );

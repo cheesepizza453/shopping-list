@@ -1,28 +1,18 @@
 import React, { useState } from "react";
-import "./item.css";
+import { useSelector } from "react-redux";
 import ItemOff from "./item/ItemOff.js";
 import ItemOn from "./item/ItemOn.js";
+import "./item.css";
 
-function Item({
-  e,
-  i,
-  //itemNameChange,
-  //setitemNameChange,
-  saveProductName,
-  saveProductPrice,
-  productNameValue,
-  productPriceValue,
-  // chageItemName,
-  forID,
-}) {
+function Item({ e }) {
+  let state = useSelector((state) => state);
   const [itemBtnClickArea, setItemBtnClickArea] = useState(true);
   const itemBtnClickAreaChange = () => {
     itemBtnClickArea ? setItemBtnClickArea(false) : setItemBtnClickArea(true);
   };
 
   return (
-    //ToDo : 키값에 함수 넣으면 리렌더링 이슈로 인풋창 계속 리셋되어 임시로 index 추가함 / 230405
-    <div className="item" key={forID}>
+    <div className="item" key={state.items.id}>
       {itemBtnClickArea ? (
         <ItemOff
           e={e}
@@ -34,10 +24,6 @@ function Item({
           e={e}
           itemBtnClickArea={itemBtnClickArea}
           itemBtnClickAreaChange={itemBtnClickAreaChange}
-          saveProductName={saveProductName}
-          saveProductPrice={saveProductPrice}
-          productNameValue={productNameValue}
-          productPriceValue={productPriceValue}
         />
       )}
     </div>

@@ -1,11 +1,20 @@
 import "./App.css";
-import React, { useState } from "react";
-//import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import ItemList from "./components/ItemList.js";
 import MenuBar from "./components/MenuBar";
 import Budget from "./components/Budget";
 import Modal from "./components/Modal";
+import axios from "axios";
+import { getNames } from "./api";
+import { setItems } from "./store.js";
 //import {store에서 export해 사용하려는 함수} from "./store/itemListSlice.js"
+
+// const cors = require("cors");
+// const app = express();
+// app.use(cors());
+
+//모든 도메인
 
 function App() {
   //Redux store를 가져와줌
@@ -16,11 +25,34 @@ function App() {
   let dispatch = useDispatch()
   */
 
+  //
+  //디스패치와 유즈셀렉터
+  const dispatch = useDispatch();
+  //let state = useSelector((state) => state);
+
+  //
+  //유즈이펙트 async await
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get("http://localhost:4000/items");
+      dispatch(setItems(response.data.sort((a, b) => b.id - a.id)));
+    }
+    fetchData();
+  }, [dispatch]);
+
+  //axios
+  // axios
+  //   .get("http://localhost:4000/items")
+  //   .then((response) => dispatch(setItems(response.data)));
+
+  //fetch then
+  // fetch("http://localhost:4000/items")
+  //   .then((response) => response.json())
+  //   .then((data) => dispatch(setItems(data)));
+
   const [modalOpen, setModlalOpen] = useState(false);
   const [budget, setBudget] = useState(0);
-  const [data, setData] = useState([]);
-
-  const budgetChange = budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  //const budgetChange = budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   const showModal = () => {
     setModlalOpen(true);
@@ -38,18 +70,14 @@ function App() {
   return (
     <div className="wrap">
       {/* 예산 */}
-      <Budget showModal={showModal} budgetChange={budgetChange} />
+      <Budget showModal={showModal} />
       {/* 상품리스트 */}
       <ItemList />
       {/* 메뉴바 */}
-      <MenuBar data={data} />
+      <MenuBar />
       {/* 예산 모달 */}
       {modalOpen ? (
-        <Modal
-          closeModal={closeModal}
-          budgetValue={budgetValue}
-          budgetChange={budgetChange}
-        />
+        <Modal closeModal={closeModal} budgetValue={budgetValue} />
       ) : null}
     </div>
   );
